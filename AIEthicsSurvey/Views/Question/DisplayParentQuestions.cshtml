@@ -1,0 +1,214 @@
+﻿@model List<AIEthicsSurvey.Models.Question>
+
+@{
+	ViewBag.Title = "Questions";
+
+}
+
+@if (Model != null)
+{
+	for (int i = 0; i < Model.Count; i++)
+	{
+<div class="card row qParent" style="background-color:#ffffff" aria-controls="children_@Model[i].ID">
+	<div class="card-header" style="background-color:#b3dcff">
+		<h5 style="padding:10px">@Model[i].questionText</h5>
+
+	</div>
+	<div class="row card-body">
+		<div class="col-lg-10">
+			@Html.Action("BinaryAnswer", "Question", new { q = @Model[i]})
+		</div>
+		<div class="col-lg-2">
+			<span id="ok_@Model[i].ID" class="glyphicon glyphicon-ok ok" style="padding:10px; color:green; display:none"></span>
+		</div>
+	</div>
+
+	@if (Model[i].children.Count > 0)
+	{
+		<div class="panel-body" id="children_@Model[i].ID" style="display:none">
+			
+				@Html.Action("QChildren", "Question", new { id = Model[i].ID })
+			
+		</div>
+	}
+</div>
+	}
+}
+
+<script>
+	/*$('.yes-btn').click(function (event) {
+
+		console.log('wtf');
+		event.preventDefault();
+		event.stopPropagation();
+
+		var idd = $(this).attr('aria-controls');
+		var col = $("[id=" + idd + "]")
+
+		var disp = col.css("display");
+
+		console.log(disp + " " + col.length);
+
+		if (disp === "none")
+			col.css("display", "block");
+		else
+			col.css("display", "none");
+
+
+		//console.log(id);
+
+	});*/
+</script>
+
+<script>
+	$(function () {
+
+		$('.yes-btn.qparent-btn').unbind().click(function () {
+			console.log("yeeees");
+
+			var id = $(this).attr('id').split('_')[1].trim();
+
+			var idd = $(this).attr('aria-controls');
+			var col = $("[id=" + idd + "]")
+
+			if ($(this).hasClass('btn-default')) {
+				$(this).removeClass('btn-default');
+				$(this).addClass('btn-success');
+
+				col.css("display", "block");
+
+				$(this).siblings().removeClass('btn-danger');
+				$(this).siblings().addClass('btn-default');
+
+				var oy = $(this);
+				$.get("/Question/RegisterAnswer", { a: "yes", id: id }, function (data) {
+					//alert(data);
+					if ((oy.hasClass('qparent-btn'))) {
+						$.get("/Question/QChildren", { id: data }, function (viewData) {
+							//alert(viewData);
+							//console.log("not a child");
+
+							//var col = $("[id=" + idd + "]");
+							//alert(col);
+							col.empty();
+							col.html(viewData);
+
+							
+
+						})
+					}
+					else {
+						console.log("a child");
+					}
+				});
+
+			} else {
+
+				if ($(this).hasClass('btn-success')) {
+					$(this).removeClass('btn-success');
+					$(this).addClass('btn-default');
+
+					col.css("display", "none");
+
+					var index;
+					var oy = $(this);
+
+					$.get("/Question/RegisterAnswer", { a: "", id: id }, function (data) {
+						//alert(data);
+
+
+						$.get("/Question/QChildren", { id: data }, function (viewData) {
+
+							//alert(viewData);
+							if ((oy.hasClass('qchild-btn'))) {
+
+								console.log("not a child");
+								//var col = $("[id=" + idd + "]");
+								col.empty();
+
+								col.html(viewData);
+								
+							}
+							else {
+								console.log("a child");
+							}
+						})
+					});
+
+				}
+			}
+		})
+		
+	})
+
+	$(function () {
+		$('.no-btn.qparent-btn').unbind().click(function () {
+			console.log("nooo");
+
+			var id = $(this).attr('id').split('_')[1].trim();
+
+			var idd = $(this).attr('aria-controls');
+			var col = $("[id=" + idd + "]")
+
+			if ($(this).hasClass('btn-default')) {
+				$(this).removeClass('btn-default');
+				$(this).addClass('btn-danger');
+
+				$(this).siblings().removeClass('btn-success');
+				$(this).siblings().addClass('btn-default');
+				col.css("display", "none");
+
+				var oy = $(this);
+				$.get("/Question/RegisterAnswer", { a: "no", id: id }, function (data) {
+					//alert(data);
+					if ((oy.hasClass('qparent-btn'))) {
+						$.get("/Question/QChildren", { id: data }, function (viewData) {
+							//alert(viewData);
+							//console.log("not a child");
+
+							//var col = $("[id=" + idd + "]");
+							//alert(col);
+							col.empty();
+							col.html(viewData);
+
+
+
+						})
+					}
+					else {
+						console.log("a child");
+					}
+				});
+			} else {
+
+				if ($(this).hasClass('btn-danger')) {
+					$(this).removeClass('btn-danger');
+					$(this).addClass('btn-default');
+
+					var oy = $(this);
+					$.get("/Question/RegisterAnswer", { a: "", id: id }, function (data) {
+						//alert(data);
+						if ((oy.hasClass('qparent-btn'))) {
+							$.get("/Question/QChildren", { id: data }, function (viewData) {
+								//alert(viewData);
+								//console.log("not a child");
+
+								//var col = $("[id=" + idd + "]");
+								//alert(col);
+								col.empty();
+								col.html(viewData);
+
+
+
+							})
+						}
+						else {
+							console.log("a child");
+						}
+					});
+				}
+			}
+
+		})
+	})
+</script>

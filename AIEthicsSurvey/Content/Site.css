@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.btn-landing {
+	text-shadow: 0 1px 0 #ff6a00;
+	background-image: -webkit-linear-gradient(top, #ff6a00 0%, #ff6a00 100%);
+	background-image: -o-linear-gradient(top, #ff6a00 0%, #ff6a00 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ff6a00), to(#ff6a00));
+	background-image: linear-gradient(to bottom, #ff6a00 0%, #ff6a00 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+	background-repeat: repeat-x;
+	border-color: #ff6a00;
+	border-color: #ff6a00;
+}

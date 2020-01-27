@@ -1,0 +1,138 @@
+﻿@model AIEthicsSurvey.Models.Question
+
+@{
+
+}
+<div class="btn-group-sm btn-group-vertical" style="margin-left:50px; ">
+	@if (Model.parentID == null)
+	{
+		if (((List<string>)Session["answers"])[Model.ID].Contains("yes"))
+		{
+			<button id="yes_@Model.ID" class="btn btn-success yes-btn qparent-btn" style="padding:3px" aria-controls="children_@Model.ID">
+				<x style="vertical-align:middle"><span class="glyphicon glyphicon-ok-circle" style="vertical-align:middle; padding-right:10px"></span> Yes </x>
+			</button>
+		}
+		else
+		{
+			<button id="yes_@Model.ID" class="btn btn-default yes-btn qparent-btn" style="padding:3px" aria-controls="children_@Model.ID">
+				<x style="vertical-align:middle"><span class="glyphicon glyphicon-ok-circle" style="vertical-align:middle; padding-right:10px"></span> Yes </x>
+			</button>
+		}
+
+		if (((List<string>)Session["answers"])[Model.ID].Contains("no"))
+		{
+			<button id="no_@Model.ID" class="btn btn-danger no-btn qparent-btn" style="padding:3px" aria-controls="children_@Model.ID">
+				<x style="vertical-align:middle; padding:10px"><span class="glyphicon glyphicon-ban-circle" style="vertical-align:middle; padding-right:10px"></span> No </x>
+			</button>
+		}
+		else
+		{
+			<button id="no_@Model.ID" class="btn btn-default no-btn qparent-btn" style="padding:3px" aria-controls="children_@Model.ID">
+				<x style="vertical-align:middle; padding:10px"><span class="glyphicon glyphicon-ban-circle" style="vertical-align:middle; padding-right:10px"></span> No </x>
+			</button>
+		}
+	}
+
+	@if (Model.parentID != null)
+	{
+		if (((List<string>)Session["answers"])[Model.ID].Contains("yes"))
+		{
+			<button id="yes_@Model.ID" class="btn btn-success yes-btn qchild-btn" style="padding:3px" aria-controls="children_@Model.ID">
+				<x style="vertical-align:middle"><span class="glyphicon glyphicon-ok-circle" style="vertical-align:middle; padding-right:10px"></span> Yes </x>
+			</button>
+		}
+		else
+		{
+			<button id="yes_@Model.ID" class="btn btn-default yes-btn qchild-btn" style="padding:3px" aria-controls="children_@Model.ID">
+				<x style="vertical-align:middle"><span class="glyphicon glyphicon-ok-circle" style="vertical-align:middle; padding-right:10px"></span> Yes </x>
+			</button>
+		}
+
+		if (((List<string>)Session["answers"])[Model.ID].Contains("no"))
+		{
+			<button id="no_@Model.ID" class="btn btn-danger no-btn qchild-btn" style="padding:3px" aria-controls="children_@Model.ID">
+				<x style="vertical-align:middle; padding:10px"><span class="glyphicon glyphicon-ban-circle" style="vertical-align:middle; padding-right:10px"></span> No </x>
+			</button>
+		}
+		else
+		{
+			<button id="no_@Model.ID" class="btn btn-default no-btn qchild-btn" style="padding:3px" aria-controls="children_@Model.ID">
+				<x style="vertical-align:middle; padding:10px"><span class="glyphicon glyphicon-ban-circle" style="vertical-align:middle; padding-right:10px"></span> No </x>
+			</button>
+		}
+	}
+
+</div>
+
+<script>
+	$(function () {
+		$('.qchild-btn.no-btn').unbind().click(function () {
+			console.log("nooo");
+
+			var id = $(this).attr('id').split('_')[1].trim();
+
+		//	var idd = $(this).attr('aria-controls');
+		//	var col = $("[id=" + idd + "]")
+
+			if ($(this).hasClass('btn-default')) {
+				$(this).removeClass('btn-default');
+				$(this).addClass('btn-danger');
+
+				$(this).siblings().removeClass('btn-success');
+				$(this).siblings().addClass('btn-default');
+		//		col.css("display", "none");
+
+				$.get("/Question/RegisterAnswer", { a: "no", id: id }, function (data) {
+					//alert(data);
+				})
+			} else {
+
+				if ($(this).hasClass('btn-danger')) {
+					$(this).removeClass('btn-danger');
+					$(this).addClass('btn-default');
+
+					$.get("/Question/RegisterAnswer", { a: "", id: id }, function (data) {
+						//alert(data);
+					})
+				}
+			}
+
+		})
+	})
+
+	$(function () {
+		$('.qchild-btn.yes-btn').unbind().click(function () {
+			console.log("yeees");
+
+			var id = $(this).attr('id').split('_')[1].trim();
+
+		//	var idd = $(this).attr('aria-controls');
+		//	var col = $("[id=" + idd + "]")
+
+			if ($(this).hasClass('btn-default')) {
+				$(this).removeClass('btn-default');
+				$(this).addClass('btn-success');
+
+				$(this).siblings().removeClass('btn-danger');
+				$(this).siblings().addClass('btn-default');
+			//	col.css("display", "none");
+
+				$.get("/Question/RegisterAnswer", { a: "yes", id: id }, function (data) {
+					//alert(data);
+				})
+			} else {
+
+				if ($(this).hasClass('btn-success')) {
+					$(this).removeClass('btn-success');
+					$(this).addClass('btn-default');
+
+					$.get("/Question/RegisterAnswer", { a: "", id: id }, function (data) {
+						//alert(data);
+						console.log("registered answer");
+					})
+				}
+			}
+
+		})
+	})
+</script>

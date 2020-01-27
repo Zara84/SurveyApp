@@ -18,10 +18,15 @@ namespace AIEthicsSurvey.Models
 
         public string questionText { get; set; }
 
-        public AnswerType answerType { get; set; }
-        public Answer answerValue { get; set; }
+        public string answerTypeID { get; set; }
 
-        public List<Question> children = new List<Question>();
+        public List<AIEthicsSurvey.Models.Question> children = new List<AIEthicsSurvey.Models.Question>();
+
+        public string categoryID;
+
+        public string subcategoryID;
+
+        public string parentID;
 
         public Question()
         {
@@ -53,4 +58,6 @@ namespace AIEthicsSurvey.Models
     {
         public List<string> value = new List<string>();
     }
+
+    
 }

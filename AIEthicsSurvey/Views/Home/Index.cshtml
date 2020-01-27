@@ -1,31 +1,154 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+<div class="container-fluid" style="  background-color: #000000">
+	<div class=" container">
+
+
+		<div class="col-md-6">
+			<img src="~/Content/Images/landing iris.png" style="width: 100%">
+		</div>
+
+
+		<div class="d-flex col-md-offset-6 text-center" style="height: 100vh">
+
+
+			<div class="card" style=" background-color: #000000; padding: 20px; padding-top: 15%">
+				<h1 style="font-size: 70px; color: #43637c;  text-align: center">Responsible Artificial Intelligence</h1>
+				<p style="font-size: 20px; text-align: center; padding:20px; color:#cecece">We study the ethical and societal impact of AI</p>
+			</div>
+
+			<div class="card" style="margin-top: 15%">
+
+				<h3 class="card-header" style="font-size: 30px; color: #cb8b31">Get involved</h3>
+				<div class="card-body">
+					<p style="padding: 10px; text-align:center; color: #808080">Pellentesque commodo urna vel ante tincidunt, in faucibus nulla eleifend. Proin egestas eget dolor quis molestie. </p>
+
+					<ul>
+						<li class="col-md-6" style="height: 100%">
+							<div class="card" style="height: 100%; border-color: aqua">
+								<h4 class="card-title" style="color: #75afdc">New survey</h4>
+								<div class="card-body">
+									<p style="color:aliceblue; margin-top: 20px">Praesent sit amet ultrices nulla. Sed et erat ut augue euismod pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+								</div>
+								<div class="card-footer">
+									<p style="margin-top: 20px"><a class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Start survey</a></p>
+								</div>
+							</div>
+						</li>
+
+						<li class="col-md-6" style="height: 100%">
+
+							<div class="card align-text-bottom" style="height: 100%">
+								<h4 class="card-title" style="color: #72acd9">Update existing survey</h4>
+								<div class="card-body" style="text-align: center">
+									<p style="color:aliceblue">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et turpis sapien. Mauris at scelerisque libero. Nullam ante est, fermentum et pellentesque id, tincidunt eget est.</p>
+									<div class="card-footer">
+										<p style="text-align: end"><a class="btn btn-primary btn-block" href="https://go.microsoft.com/fwlink/?LinkId=301866">Update survey</a></p>
+									</div>
+								</div>
+							</div>
+
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div>
+
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Before we begin</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>Somethig something dark side somethig something complete</p>
+							@Html.Action("StartNewSurvey", "Home", new { area = "" });
+
+							<div class="checkbox">
+
+								<label>
+									<input type="checkbox" />
+									Keep my session open
+									<button type="button" class="btn btn-info"
+											data-container="body" data-toggle="popover" data-placement="right"
+											title="Open session"
+											data-content="By checking this box you agree to allow us to use cookies to keep your session open.">
+										?
+									</button>
+								</label>
+							</div>
+
+
+							<div class="checkbox">
+								<label data-toggle="collapse" data-target="#collapseEmail">
+									<input id="restoreCheck" type="checkbox" /> Recover my session
+									<button type="button" class="btn btn-info"
+											data-container="body" data-toggle="popover" data-placement="right"
+											title="Session recovery"
+											data-content="Check this box if you'd like to be able to recover a closed or expired session">
+										?
+									</button>
+								</label>
+							</div>
+						</div>
+
+						<div id="collapseEmail" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">Email</span>
+									</div>
+									<input type="text" class="form-control" placeholder="Enter a valid email" aria-label="recovery email" aria-describedby="basic-addon1">
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" id="continue" class="btn btn-primary">Continue</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="row" style="background-color : #2b2626; color: #808080">
+			<div class="col-md-4">
+				<h2>Getting started</h2>
+				<p>
+					ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+					enables a clean separation of concerns and gives you full control over markup
+					for enjoyable, agile development.
+				</p>
+				<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+			</div>
+			<div class="col-md-4">
+				<h2>Get more libraries</h2>
+				<p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+				<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+			</div>
+			<div class="col-md-4">
+				<h2>Web Hosting</h2>
+				<p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+				<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+<script>
+
+</script>

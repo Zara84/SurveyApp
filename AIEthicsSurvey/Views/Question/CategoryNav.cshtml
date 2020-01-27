@@ -1,0 +1,52 @@
+﻿@model List<AIEthicsSurvey.Models.Category>
+
+@{
+	ViewBag.Title = "Categories";
+	
+}
+
+<div class="container" id="categoryNav">
+	<div class="col-lg-4">
+		<div class=" nav nav-fill nav-pills flex-column catNav">
+			@if (Model.Count > 0)
+			{
+				for (int i = 0; i < Model.Count; i++)
+				{
+
+					string idd = "sub";
+					for (int j = 0; j < i; j++)
+					{
+						idd += "b";
+					}
+					string iddd = "#" + idd;
+
+			<div class="nav-item">
+				<div class="btn-group btn-block">
+					
+					<div id="cat_@(Model[i].Id)" class="btn btn-primary btn-block qNav"
+						 aria-controls=@(idd)>
+						@(Model[i].Name)
+
+						<button id="expandcat_@(Model[i].Id)" class="btn btn-primary catNav"
+								aria-controls=@(idd)
+								style="float:right">
+							<span class="glyphicon glyphicon-plus" ></span>
+						</button>
+					</div>
+					
+				</div>
+			</div>
+				<div class="nav-item" id=@(idd) style="display: none">
+					<div id="subcat_@Model[i].Id" >
+						@Html.Action("SubcatNav", "Question", new {cat_id = @Model[i].Id })
+					</div>
+				</div>
+			
+
+				}
+			}
+		</div>
+	</div>
+
+</div>
+

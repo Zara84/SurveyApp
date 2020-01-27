@@ -1,0 +1,21 @@
+﻿@model List<AIEthicsSurvey.Models.Category>
+@{
+	ViewBag.Title = "SurveyContainer";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" style="  background-color: #000000">
+	<div class="container">
+		<div class="col-lg-4" id="catBar">
+			@Html.Action("CategoryNav", "Question", new { area = "" })
+		</div>
+
+		<div class="col-lg-8" style="background-color:aliceblue">
+			<div class="panel-body" id="qBar">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
